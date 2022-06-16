@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
+import { FileService } from '../file/file.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { CreateTrackDto } from './dto/create-track.dto';
 import { Comment, CommentDocument, CommentSchema } from './schemas/comment.schema';
@@ -11,6 +12,7 @@ export class TrackService {
   constructor(
     @InjectModel(Track.name) private trackModel: Model<TrackDocument>,
     @InjectModel(Comment.name) private commentModel: Model<CommentDocument>,
+    private fileService:FileService
   ) {}
 
   async create(dto: CreateTrackDto, picture, audio): Promise<Track> {
